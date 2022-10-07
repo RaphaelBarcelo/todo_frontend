@@ -1,21 +1,30 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
-export const Footer = () => {
+type FooterProps = {
+    numberOfTodos:number;
+    clearCompleted:()=>void;
+}
+
+
+
+export const Footer = ({numberOfTodos, clearCompleted}:FooterProps) => {
+
     return (
         <footer className="footer">
-            <span className="todo-count"><strong>0</strong> item left</span>
+            <span className="todo-count"><strong>{numberOfTodos}</strong> {numberOfTodos === 1 ? ' item ':' items '} left</span>
             <ul className="filters">
                 <li>
-                    <a className="selected" href="#/">All</a>
+                    <NavLink className={(isActive) => isActive? 'selected':undefined} to="/all">All</NavLink>
                 </li>
                 <li>
-                    <a href="#/active">Active</a>
+                    <NavLink className={(isActive) => isActive? 'selected':undefined} to="/active">Active</NavLink>
                 </li>
                 <li>
-                    <a href="#/completed">Completed</a>
+                    <NavLink className={(isActive) => isActive? 'selected':undefined} to="/completed">Completed</NavLink>
                 </li>
             </ul>
-            <button className="clear-completed">Clear completed</button>
+            <button className="clear-completed" onClick={clearCompleted}>Clear completed</button>
         </footer>
         );
 }

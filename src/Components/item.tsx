@@ -1,28 +1,27 @@
 import React from "react";
-import {Todo} from "./models";
 
-export const Item = ({todo}:{todo:Todo}) => {
-    //Ici jusqu a trouver comment destructurer en gardant l'objet to-do en tant que parametre
-    const id = todo.id;
-    const title = todo.title;
-    const completed = todo.completed;
+type TodoItemProps = {
+    id:number;
+    title:string;
+    completed:boolean;
+    handleComplete:()=>void;
+    handleDelete:()=>void;
+}
 
-    const handleOnClick = () => {
-        todo.onDelete(id)
-    }
-
-    const handleOnCheck = () => {
-        todo.onComplete(id)
-    };
+export const Item = ({id, title, completed, handleComplete, handleDelete}:TodoItemProps) => {
+    //only for testing
+    let idToString = "" + id;
+    idToString = String(id);
+    const idWithTitle = ("ID:" +idToString + " _ _ _ TITLE:" + title);
 
     return (
         <li>
-            <div key={id}>
-                <input type="checkbox" onChange={handleOnCheck} checked={completed}/>
-                <label>{id}</label>
-                <label>{title}</label>
-                <button onChange={handleOnClick}>Delete</button>
+            <div className="view">
+                <input className="toggle" type="checkbox" onChange={handleComplete} checked={completed}/>
+                <label>{idWithTitle}</label>
+                <button className="destroy" onClick={handleDelete}/>
             </div>
+            <input className="edit" value=""/>
         </li>
     );
 }

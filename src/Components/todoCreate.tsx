@@ -11,11 +11,12 @@ type TodoCreateProps = {
         if (event.code === 'Enter') {
             if (todoTitle.trim().length>0){
                 onTodoCreate(todoTitle)
+                setTodoTitle("");
             }}
         }
         return (
             <input value={todoTitle}
-                   className={'New Todo'}
+                   className={'new-todo'}
                    placeholder={'What needs to be done?'} autoFocus
                    onChange={(event)=>{
                        setTodoTitle(event.target.value)
